@@ -1,37 +1,70 @@
+function doTheOperation(firstNumber, secondNumber, operator) {
+  const a = Number(firstNumber);
+  const b = Number(secondNumber);
 
-function add(firstNumber, secondNumber){
+  const operations = {
+    '+': (x, y) => x + y,
+    '-': (x, y) => x - y,
+    '*': (x, y) => x * y,
+    '/': (x, y) => x / y,
+  };
 
-    return firstNumber+secondNumber;
+  const result = operations[operator](a, b);
+
+  updateDisplay(result);
+  operator = "";
+  firstNumber = result.toString();
+  secondNumber = "";
+
 }
 
-function subtract(firstNumber, secondNumber){
-
-    return firstNumber-secondNumber;
-}
-
-function multiply(firstNumber, secondNumber){
-
-    return firstNumber*secondNumber;
-}
-
-function divide(firstNumber, secondNumber){
-
-    return firstNumber/secondNumber;
+function updateDisplay(value){
+    const display = document.getElementsByClassName("calculator-display")[0];
+    display.textContent = value;
 }
 
 
-function calculator(){
-    const operator = "+";
-    const firstNumber = 3;
-    const secondNumber = 6;
+let displayValue = ""
+let firstNumber = "";
+let secondNumber = "";
+let operator = "";
+function calculator(clickedButton){
 
-    if(operator === "+"){
-        add(firstNumber,secondNumber)
-    }else if(operator === "-"){
-        subtract(firstNumber,secondNumber)
-    }else if(operator === "/"){
-        multiply(firstNumber,secondNumber)
-    }else if(operator === "*"){
-        divide(firstNumber,secondNumber)
+    if(/^[0-9]$/.test(clickedButton)){
+        if(operator === ""){
+            firstNumber += clickedButton;
+            updateDisplay(firstNumber)
+        }else{ 
+            secondNumber += clickedButton;
+            updateDisplay(secondNumber)
+
+        }
     }
+
+    if(clickedButton === "+" ||
+       clickedButton === "-" ||
+       clickedButton === "/" ||
+       clickedButton === "*"
+    ){
+        operator = clickedButton;
+        if(secondNumber !== ""){
+            doTheOperation(firstNumber, secondNumber ,operator);
+        }
+    }
+
+    if(clickedButton === "=" && firstNumber !== "" && secondNumber !== ""){
+        doTheOperation(firstNumber, secondNumber ,operator)
+    }
+    
+}
+
+createButtonsEventListenerButtons()
+
+function createButtonsEventListenerButtons(){
+        const buttons = document.querySelectorAll("button");
+        buttons.forEach(button => {
+        button.addEventListener("click", () => {
+            calculator(button.textContent)
+       });
+    });
 }
