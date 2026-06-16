@@ -1,6 +1,5 @@
 function createCalculator() {
 
-    let displayValue = ""
     let firstNumber = "";
     let secondNumber = "";
     let operator = "";
@@ -58,12 +57,12 @@ function createCalculator() {
         if(operations[clickedButton]){
             operator = clickedButton;
             if(secondNumber !== ""){
-                doTheOperation(firstNumber, secondNumber ,operator);
+                doTheOperation();
             }
         }
 
         if(clickedButton === "=" && firstNumber !== "" && secondNumber !== ""){
-            doTheOperation(firstNumber, secondNumber ,operator)
+            doTheOperation()
         }
         
     }
@@ -83,11 +82,10 @@ function createCalculator() {
     }
 
     function resetCalculator(){
-        displayValue = "0"
         firstNumber = "";
         secondNumber = "";
         operator = "";
-        updateDisplay(displayValue)
+        updateDisplay(0)
     }
     document.querySelectorAll("button").forEach(button => {
         button.addEventListener("click", () => {
