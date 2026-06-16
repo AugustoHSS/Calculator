@@ -59,6 +59,13 @@ body{
     border-radius: 10px;
     width: 85%;
     height: 90px;
+    color: #202020;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding-right: 15px;
+    font-size: 60px;
+    font-weight: 500;
 }
 
 .calculator-grid{
