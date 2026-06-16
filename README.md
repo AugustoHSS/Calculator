@@ -1,5 +1,7 @@
 # 🧮 Calculator - The Odin Project
 
+> 🔗 **Live Demo:** [Click here to try the calculator](https://augustohss.github.io/Calculator/)
+
 ## 📝 About the Project
 This is an interactive calculator web application built as part of [The Odin Project](https://www.theodinproject.com/) Foundations curriculum. The main goal of this project was to put into practice programming logic with JavaScript, DOM manipulation, and layout creation using CSS Grid.
 
