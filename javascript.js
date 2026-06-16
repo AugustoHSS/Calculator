@@ -3,7 +3,7 @@ function createCalculator() {
     let firstNumber = "";
     let secondNumber = "";
     let operator = "";
-    
+    const display = document.getElementsByClassName("calculator-display")[0];
     const operations = {
         '+': (x, y) => x + y,
         '-': (x, y) => x - y,
@@ -15,6 +15,10 @@ function createCalculator() {
     const a = Number(firstNumber);
     const b = Number(secondNumber);
 
+    if (operator === "/" && b === 0) {
+        resetCalculator();
+        return;
+    }
     const result = operations[operator](a, b);
 
     updateDisplay(result);
@@ -25,21 +29,23 @@ function createCalculator() {
     }
 
     function updateDisplay(value){
-        const display = document.getElementsByClassName("calculator-display")[0];
         const strValue = String(value);
-        if(strValue.includes(".")){
-            display.textContent = Number(strValue).toFixed(3);
-        }else{
-            display.textContent = strValue;
-        }
+        display.textContent = strValue;
+
     }
 
     function calculator(clickedButton){
-        if(/^[0-9]$/.test(clickedButton)){
+        if(/^[0-9.]$/.test(clickedButton)){
             if(operator === ""){
+                if (clickedButton === "." && firstNumber.includes(".")) {    
+                    return
+            }
                 firstNumber += clickedButton;
                 updateDisplay(firstNumber)
             }else{ 
+                if (clickedButton === "." && secondNumber.includes(".")) {    
+                    return
+                }
                 secondNumber += clickedButton;
                 updateDisplay(secondNumber)
 
@@ -68,16 +74,15 @@ function createCalculator() {
     }
 
     function eraseLastDigit(){
-        console.log(secondNumber)
         if(secondNumber !== ""){
             secondNumber = secondNumber.slice(0, -1);
-            updateDisplay(secondNumber)
+            updateDisplay(secondNumber || "0")
         }
         if(secondNumber === "" &&
            firstNumber !== "" &&
             operator === ""){
             firstNumber = firstNumber.slice(0, -1);
-            updateDisplay(firstNumber)
+            updateDisplay(firstNumber || "0")
         }
     }
 
