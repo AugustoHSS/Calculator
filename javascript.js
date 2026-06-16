@@ -27,7 +27,12 @@ function createCalculator() {
 
     function updateDisplay(value){
         const display = document.getElementsByClassName("calculator-display")[0];
-        display.textContent = value;
+        const strValue = String(value);
+        if(strValue.includes(".")){
+            display.textContent = Number(strValue).toFixed(3);
+        }else{
+            display.textContent = strValue;
+        }
     }
 
     function calculator(clickedButton){
