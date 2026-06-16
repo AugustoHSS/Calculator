@@ -36,7 +36,6 @@ function createCalculator() {
     }
 
     function calculator(clickedButton){
-
         if(/^[0-9]$/.test(clickedButton)){
             if(operator === ""){
                 firstNumber += clickedButton;
@@ -50,7 +49,11 @@ function createCalculator() {
 
         if(clickedButton === "AC"){
             resetCalculator()
-        } 
+        }
+
+        if(clickedButton === "C"){
+            eraseLastDigit()
+        }
 
         if(operations[clickedButton]){
             operator = clickedButton;
@@ -63,6 +66,20 @@ function createCalculator() {
             doTheOperation(firstNumber, secondNumber ,operator)
         }
         
+    }
+
+    function eraseLastDigit(){
+        console.log(secondNumber)
+        if(secondNumber !== ""){
+            secondNumber = secondNumber.slice(0, -1);
+            updateDisplay(secondNumber)
+        }
+        if(secondNumber === "" &&
+           firstNumber !== "" &&
+            operator === ""){
+            firstNumber = firstNumber.slice(0, -1);
+            updateDisplay(firstNumber)
+        }
     }
 
     function resetCalculator(){
